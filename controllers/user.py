@@ -20,7 +20,9 @@ def add_user_function():
             'id': user.id,
             'name': user.name,
             'email': user.email,
-            'password': user.password
+            'password': user.password,
+            'role': user.role
+            
         }
         return data
 

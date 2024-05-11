@@ -1,0 +1,41 @@
+{% extends "index.html" %}
+{% block body %}
+<div class="container">
+    <h2>Jobs Management</h2>
+    {% if role == 'Admin' %}
+    <form method="POST">
+        <div class="mb-3">
+            <label for="title" class="form-label">Job Title</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" name="description" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="supervisor_id" class="form-label">Supervisor</label>
+            <select class="form-select" id="supervisor_id" name="supervisor_id">
+                <!-- Assume supervisors are passed to the template -->
+                {% for supervisor in supervisors %}
+                <option value="{{ supervisor.id }}">{{ supervisor.user.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Job</button>
+    </form>
+    {% endif %}
+    <ul class="list-group mt-3">
+        {% for job in jobs %}
+        <li class="list-group-item">
+            {{ job.title }} - {{ job.description }}
+            <div class="float-end">
+                {% if role == 'Admin' %} <a href="{{ url_for('main.edit_job', id=job.id) }}" class="btn btn-secondary btn-sm">Edit</a> {% endif %}
+                <form action="{{ url_for('main.delete_job', id=job.id) }}" method="post" style="display: inline;">
+                    {% if role == 'Admin' %} <button type="submit" class="btn btn-danger btn-sm">Delete</button> {% endif %}
+                </form>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

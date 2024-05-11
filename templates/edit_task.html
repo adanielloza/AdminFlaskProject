@@ -1,0 +1,42 @@
+{% extends "index.html" %}
+{% block body %}
+<div class="container">
+    <h2>Edit Task</h2>
+    <form method="POST">
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" class="form-control" id="description" name="description" value="{{ task.description }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="status" class="form-label">Status</label>
+            <select class="form-select" id="status" name="status">
+                <option value="Pending" {{ 'selected' if task.status == 'Pending' else '' }}>Pending</option>
+                <option value="Completed" {{ 'selected' if task.status == 'Completed' else '' }}>Completed</option>
+                <option value="InProgress" {{ 'selected' if task.status == 'InProgress' else '' }}>In Progress</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="duration" class="form-label">Duration (minutes)</label>
+            <input type="number" class="form-control" id="duration" name="duration" value="{{ task.duration }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="difficulty" class="form-label">Difficulty</label>
+            <select class="form-select" id="difficulty" name="difficulty">
+                <option value="Easy" {{ 'selected' if task.difficulty == 'Easy' else '' }}>Easy</option>
+                <option value="Medium" {{ 'selected' if task.difficulty == 'Medium' else '' }}>Medium</option>
+                <option value="Hard" {{ 'selected' if task.difficulty == 'Hard' else '' }}>Hard</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="job_id" class="form-label">Job</label>
+            <select class="form-select" id="job_id" name="job_id">
+                {% for job in jobs %}
+                <option value="{{ job.id }}" {{ 'selected' if task.job_id == job.id else '' }}>{{ job.title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Task</button>
+    </form>
+</div>
+{% endblock %}
+

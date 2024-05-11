@@ -1,0 +1,24 @@
+{% extends "index.html" %}
+{% block body %}
+<h2>Manage Supervisors</h2>
+<form method="POST" action="" class="mb-3">
+    <div class="form-group">
+        <label for="user_id">User ID:</label>
+        <input type="number" class="form-control" name="user_id" placeholder="User ID" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Supervisor</button>
+</form>
+<ul class="list-group">
+    {% for supervisor in supervisors %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        {{ supervisor.user.name }}
+        <div>
+            <a href="{{ url_for('edit_supervisor', id=supervisor.id) }}" class="btn btn-sm btn-success">Edit</a>
+            <form action="{{ url_for('delete_supervisor', id=supervisor.id) }}" method="POST" style="display:inline;">
+                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+            </form>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

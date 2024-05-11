@@ -28,7 +28,12 @@
                                 <input type="email" id="email" name="email" class="form-control" value={{user.email}}><br/>
                             </div>
                             <div class="form-group">
-                                <input type="password" id="password" name="password" class="form-control" value={{user.password}}>
+                                <label for="role" class="form-label">Role</label>
+                                <select class="form-select" id="role" name="role">
+                                    <option value="Admin" {{ 'selected' if user.role == 'Admin' else '' }}>Admin</option>
+                                    <option value="Supervisor" {{ 'selected' if user.role == 'Supervisor' else '' }}>Supervisor</option>
+                                    <option value="Employee" {{ 'selected' if user.role == 'Employee' else '' }}>Employee</option>
+                                </select>
                             </div>
                         <br/>
                         <br/>

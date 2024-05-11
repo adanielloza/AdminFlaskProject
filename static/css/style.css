@@ -1,0 +1,101 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+}
+
+a {
+    text-decoration: none;
+    color: inherit; /* Ensures that anchor tags use the inherited text color */
+}
+
+.sidebar {
+    width: 15%;
+    background-color: #c6d1de;
+    color: #ffffff;
+    height: 100vh;
+    position: fixed;
+    padding: 20px;
+    box-sizing: border-box;
+    transition: width 0.3s ease; /* Smooth transition for width changes */
+}
+
+.profile h3 {
+    margin-top: 10px;
+}
+
+.profile img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.sidebar ul li {
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #ebeff1;
+    border-radius: 5px;
+    color: black;
+}
+
+.sidebar ul li:hover {
+    background-color: #3c7798;
+}
+
+.main-content {
+    margin-left: 15%;
+    padding: 20px;
+    width: 85%;
+    background-color: #f7f7f7;
+}
+
+.card {
+    background: #fff;
+    width: 90%;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.chart {
+    height: 200px;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%; /* Larger sidebar on smaller screens */
+        height: auto;
+        position : relative;
+    }
+
+    .main-content {
+        margin-left: 0; /* Main content takes full width */
+        width: 100%;
+        padding: 10px;
+    }
+
+    .sidebar-toggle {
+        font-size: 14px; /* Slightly smaller font size for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        width: 100%; /* Full width sidebar on very small screens */
+    }
+
+    .main-content {
+        margin-left: 0; /* Main content takes full width */
+        width: 100%;
+        padding: 10px;
+    }
+
+}

@@ -6,13 +6,17 @@ from extensions import db
 from flask_migrate import Migrate
 from routes import main
 from models.user import User
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 login_manager = LoginManager()
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
-    app.secret_key = 'your-secret-key'  # Add this line
+    app.secret_key = os.getenv('SECRET_KEY', 'default-secret-key') # Add this line
 
     login_manager.login_view = 'main.login'
     login_manager.init_app(app)

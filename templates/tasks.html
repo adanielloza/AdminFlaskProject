@@ -1,0 +1,67 @@
+{% extends "index.html" %}
+{% block body %}
+<div class="container">
+    <h2>Tasks Management</h2>
+    {% if role == 'Admin' %}
+    <form method="POST">
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" class="form-control" id="description" name="description" required>
+        </div>
+        <div class="mb-3">
+            <label for="status" class="form-label">Status</label>
+            <select class="form-select" id="status" name="status">
+                <option value="Pending">Pending</option>
+                <option value="Completed">Completed</option>
+                <option value="InProgress">In Progress</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="duration" class="form-label">Duration</label>
+            <input type="number" class="form-control" id="duration" name="duration" required>
+            <select class="form-select mt-2" id="duration_unit" name="duration_unit">
+                <option value="minutes">Minutes</option>
+                <option value="hours">Hours</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="difficulty" class="form-label">Difficulty</label>
+            <select class="form-select" id="difficulty" name="difficulty">
+                <option value="Easy">Easy</option>
+                <option value="Medium" selected>Medium</option>
+                <option value="Hard">Hard</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="job_id" class="form-label">Job</label>
+            <select class="form-select" id="job_id" name="job_id">
+                {% for job in jobs %}
+                <option value="{{ job.id }}">{{ job.title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Task</button> 
+    </form>
+    {% endif %}
+    <ul class="list-group mt-3">
+        {% for task in tasks %}
+        <li class="list-group-item">
+            Description: {{ task.description }} - Status: {{ task.status }} -
+            Duration: {{ task.duration }} 
+            {% if task.duration_unit == 'minutes' %}
+                Minutes
+            {% else %}
+                Hours
+            {% endif %}
+            - Difficulty: {{ task.difficulty }} - Job: {{ task.job.title }}
+            <div class="float-end">
+                {% if role == 'Admin' %} <a href="{{ url_for('main.edit_task', id=task.id) }}" class="btn btn-secondary btn-sm">Edit</a> {% endif %}
+                <form action="{{ url_for('main.delete_task', id=task.id) }}" method="post" style="display: inline;">
+                    {% if role == 'Admin' %} <button type="submit" class="btn btn-danger btn-sm">Delete</button> {% endif %}
+                </form>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
